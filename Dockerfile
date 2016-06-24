@@ -63,11 +63,11 @@ RUN mv /usr/share/nginx/html /usr/share/nginx/html_orig && \
 	cp -r /kibana/* /usr/share/nginx/html
 
 # Create a start bash script
-RUN touch elk_start.sh && \
-	echo '#!/bin/bash' >> elk_start.sh && \
-	echo '/elasticsearch/bin/elasticsearch -Des.insecure.allow.root=true -Des.network.host=0.0.0.0 &' >> elk_start.sh && \
-	echo '/etc/init.d/nginx start &' >> elk_start.sh && \
-	echo 'exec /logstash/bin/logstash agent -f /logstash.conf' >> elk_start.sh && \
+RUN touch start.sh && \
+	echo '#!/bin/bash' >> start.sh && \
+	echo '/elasticsearch/bin/elasticsearch -Des.insecure.allow.root=true -Des.network.host=0.0.0.0 &' >> start.sh && \
+	echo '/etc/init.d/nginx start &' >> start.sh && \
+	echo 'exec /logstash/bin/logstash agent -f /logstash.conf' >> start.sh && \
 	chmod 777 start.sh
 
 # 80=nginx, 9200=elasticsearch, 3333,3334=logstash tcp input
